@@ -1,8 +1,18 @@
-const express = require('express');
-const router = express.Router();
+const mongoose = require('mongoose');
 
-router.get('/activites', (req, res) => {
-  res.json({ message: 'Liste des activités' });
+const activeSchema = new mongoose.Schema({
+  utilisateur_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'auth', 
+    required: true
+  },
+  tache_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'tache', 
+    required: true
+  }
 });
 
-module.exports = router;
+const active = mongoose.model('active', activeSchema);
+
+module.exports = Active;
